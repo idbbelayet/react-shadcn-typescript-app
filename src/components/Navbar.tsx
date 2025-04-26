@@ -12,7 +12,7 @@ import ThemeToggle from "./ThemeToggle";
 import { Button } from "./ui/button";
 
 function Navbar() {
-  const { logout, isAuthenticated, user } = useAuth(); // Assuming you have a way to get the current user
+  const { logout, isAuthenticated } = useAuth(); // Assuming you have a way to get the current user
   return (
     <div>
       <nav className="p-2 border-b">
