@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@radix-ui/react-label";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router";
+import { toast } from "sonner";
 import axios from "../api/axios";
 import { useAuth } from "../auth/useAuth";
 export default function Login() {
@@ -26,7 +27,7 @@ export default function Login() {
       auth.user = res.data.user;
       navigate("/");
     } catch {
-      alert("Invalid credentials");
+      toast.warning("Invalid credentials");
     }
   };
 

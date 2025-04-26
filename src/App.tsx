@@ -1,3 +1,4 @@
+import { Toaster } from "@/components/ui/sonner";
 import { Route, Routes } from "react-router";
 import { ProtectedRoute } from "./auth/ProtectedRoute";
 import Navbar from "./components/Navbar";
@@ -5,7 +6,6 @@ import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import PageNotFound from "./pages/PageNotFound";
 import Registration from "./pages/Registration";
-
 export default function App() {
   return (
     <>
@@ -24,6 +24,7 @@ export default function App() {
         />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
+      <Toaster richColors position="top-right" />
     </>
   );
 }

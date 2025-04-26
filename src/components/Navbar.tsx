@@ -17,7 +17,7 @@ function Navbar() {
     <div>
       <nav className="p-2 border-b">
         <div className="container mx-auto flex justify-between items-center">
-          <div className="text-lg font-bold">MyApp</div>
+          <div className="text-lg font-bold">React App</div>
           <ul className="flex space-x-4">
             <li>
               <Link to="/">Home</Link>
@@ -33,10 +33,16 @@ function Navbar() {
             </li>
           </ul>
           <div className="flex items-center space-x-4">
-            <Button variant={"ghost"} className="rounded-full">
+            <Button
+              variant={"ghost"}
+              className="rounded-full active:animate-ping"
+            >
               <Settings className="h-4 w-4" />
             </Button>
-            <Button variant={"ghost"} className="rounded-full">
+            <Button
+              variant={"ghost"}
+              className="rounded-full active:animate-ping"
+            >
               <Bell className="h-4 w-4" />
             </Button>
             <ThemeToggle />
