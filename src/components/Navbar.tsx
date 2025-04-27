@@ -15,22 +15,22 @@ function Navbar() {
   return (
     <div>
       <nav className="p-2 border-b bg-sidebar ">
-        <div className="container mx-auto flex justify-between items-center">
+        <div className="flex justify-between items-center">
           <div className="text-lg font-bold">
             <SidebarTrigger className="rounded-full " />
           </div>
           <ul className="flex space-x-4">
             {/* <li>
-              <Link to="/">Home</Link>
+              <NavLink to="/">Home</NavLink>
             </li>
             <li>
-              <Link to="/about">About</Link>
+              <NavLink to="/about">About</NavLink>
             </li>
             <li>
-              <Link to="/services">Services</Link>
+              <NavLink to="/services">Services</NavLink>
             </li>
             <li>
-              <Link to="/contact">Contact</Link>
+              <NavLink to="/contact">Contact</NavLink>
             </li> */}
           </ul>
           <div className="flex items-center space-x-4">
