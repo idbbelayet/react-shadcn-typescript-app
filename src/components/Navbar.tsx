@@ -6,20 +6,21 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Separator } from "@/components/ui/separator";
+import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Bell, LogOut, Settings } from "lucide-react";
-import { Link } from "react-router";
 import ThemeToggle from "./ThemeToggle";
 import { Button } from "./ui/button";
-
 function Navbar() {
   const { logout, isAuthenticated } = useAuth(); // Assuming you have a way to get the current user
   return (
     <div>
-      <nav className="p-2 border-b">
+      <nav className="p-2 border-b bg-sidebar ">
         <div className="container mx-auto flex justify-between items-center">
-          <div className="text-lg font-bold">React App</div>
+          <div className="text-lg font-bold">
+            <SidebarTrigger className="rounded-full " />
+          </div>
           <ul className="flex space-x-4">
-            <li>
+            {/* <li>
               <Link to="/">Home</Link>
             </li>
             <li>
@@ -30,7 +31,7 @@ function Navbar() {
             </li>
             <li>
               <Link to="/contact">Contact</Link>
-            </li>
+            </li> */}
           </ul>
           <div className="flex items-center space-x-4">
             <Button
