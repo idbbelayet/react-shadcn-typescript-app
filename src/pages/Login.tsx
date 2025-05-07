@@ -7,27 +7,37 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { loginSuccess } from "@/redux/authSlice";
+import { AppDispatch } from "@/redux/store";
 import { Label } from "@radix-ui/react-label";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router";
 import { toast } from "sonner";
 import axios from "../api/axios";
-import { useAuth } from "../auth/useAuth";
+//import { useAuth } from "../auth/useAuth";
+
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const auth = useAuth();
+  const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       const res = await axios.post("/auth/login", { email, password });
-      auth.login(res.data.token, res.data.user);
-      auth.user = res.data.user;
+
+      dispatch(
+        loginSuccess({
+          user: res.data.user,
+          isAuthenticated: true,
+        })
+      );
+
       navigate("/");
-    } catch {
-      toast.warning("Invalid credentials");
+    } catch (error: any) {
+      toast.warning(error.message);
     }
   };
 
@@ -57,6 +67,7 @@ export default function Login() {
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Password"
                 type="password"
+                autoComplete="off"
               />
             </div>
             <div className="flex items-center justify-end space-x-2   mt-4">

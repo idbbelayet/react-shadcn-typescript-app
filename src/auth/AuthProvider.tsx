@@ -1,4 +1,6 @@
-import { createContext, useState } from "react";
+import { RootState } from "@/redux/store";
+import { createContext } from "react";
+import { useSelector } from "react-redux";
 
 interface User {
   id: string;
@@ -9,9 +11,6 @@ interface User {
 }
 
 interface AuthContextType {
-  token: string | null;
-  login: (token: string, user: User) => void;
-  logout: () => void;
   isAuthenticated: boolean;
   user?: User | null;
 }
@@ -19,34 +18,13 @@ interface AuthContextType {
 export const AuthContext = createContext<AuthContextType>(null!);
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const [token, setToken] = useState<string | null>(() =>
-    sessionStorage.getItem("token")
+  const isAuthenticated = useSelector(
+    (state: RootState) => state.auth.isAuthenticated
   );
-  const [user, setUser] = useState<User | null>(() =>
-    sessionStorage.getItem("user")
-      ? JSON.parse(sessionStorage.getItem("user")!)
-      : null
-  );
+  const user = useSelector((state: RootState) => state.auth.user);
 
-  const login = (newToken: string, newUser: User) => {
-    sessionStorage.setItem("token", newToken);
-    sessionStorage.setItem("user", JSON.stringify(newUser));
-    setToken(newToken);
-    setUser(newUser);
-  };
-
-  const logout = () => {
-    sessionStorage.removeItem("token");
-    sessionStorage.removeItem("user");
-    setToken(null);
-    setUser(null);
-  };
-
-  const isAuthenticated = !!token;
   return (
-    <AuthContext.Provider
-      value={{ token, login, logout, isAuthenticated, user }}
-    >
+    <AuthContext.Provider value={{ isAuthenticated, user }}>
       {children}
     </AuthContext.Provider>
   );

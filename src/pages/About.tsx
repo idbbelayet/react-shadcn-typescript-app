@@ -1,3 +1,5 @@
+import Counter from "@/components/Counter";
+
 function About() {
   return (
     <div className="p-4">
@@ -9,6 +11,7 @@ function About() {
         Velit, sunt modi!
       </p>
       <div className="flex gap-2 mt-4 mb-4"></div>
+      <Counter />
     </div>
   );
 }

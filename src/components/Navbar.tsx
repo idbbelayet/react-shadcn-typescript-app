@@ -1,4 +1,3 @@
-import { useAuth } from "@/auth/useAuth";
 import UserInfo from "@/auth/UserInfo";
 import {
   Popover,
@@ -7,11 +6,19 @@ import {
 } from "@/components/ui/popover";
 import { Separator } from "@/components/ui/separator";
 import { SidebarTrigger } from "@/components/ui/sidebar";
-import { Bell, LogOut, Settings } from "lucide-react";
+
+import { RootState } from "@/redux/store";
+import { Settings } from "lucide-react";
+import { useSelector } from "react-redux";
+import Logout from "./Logout";
+import NotificationInfo from "./NotificationInfo";
 import ThemeToggle from "./ThemeToggle";
 import { Button } from "./ui/button";
 function Navbar() {
-  const { logout, isAuthenticated } = useAuth(); // Assuming you have a way to get the current user
+  const isAuthenticated = useSelector(
+    (state: RootState) => state.auth.isAuthenticated
+  );
+
   return (
     <div>
       <nav className="p-2 border-b bg-sidebar ">
@@ -40,40 +47,24 @@ function Navbar() {
             >
               <Settings className="h-4 w-4" />
             </Button>
-            <Button
-              variant={"ghost"}
-              className="rounded-full active:animate-ping"
-            >
-              <Bell className="h-4 w-4" />
-            </Button>
+            <NotificationInfo />
             <ThemeToggle />
-            {isAuthenticated && (
+            {
               <Popover>
                 <PopoverTrigger className="cursor-pointer">
-                  <UserInfo />
+                  {isAuthenticated && <UserInfo />}
                 </PopoverTrigger>
                 <PopoverContent>
                   <ul className="flex flex-col space-y-2">
-                    <li>
-                      <UserInfo />
-                    </li>
-
+                    <li>{isAuthenticated && <UserInfo />}</li>
                     <Separator />
-
                     <li>
-                      <Button
-                        onClick={logout}
-                        variant={"ghost"}
-                        className="w-full justify-start"
-                      >
-                        <LogOut className="mr-2 h-4 w-4" />
-                        Logout
-                      </Button>
+                      <Logout />
                     </li>
                   </ul>
                 </PopoverContent>
               </Popover>
-            )}
+            }
           </div>
         </div>
       </nav>

@@ -1,7 +1,8 @@
-import { useAuth } from "./useAuth";
+import { RootState } from "@/redux/store";
+import { useSelector } from "react-redux";
 
 function UserInfo() {
-  const { user } = useAuth();
+  const user = useSelector((state: RootState) => state.auth.user);
 
   return (
     <div className="flex items-center gap-2 px-1 text-left text-sm">

@@ -7,9 +7,9 @@ import { createBrowserRouter, RouterProvider } from "react-router";
 // Simulated API/resource data
 const res = [
   { url: "/", componentName: "Dashboard", isProtected: true },
-  //{ url: "/about", componentName: "About", isProtected: true },
+  { url: "/about", componentName: "About", isProtected: true },
   { url: "/salesform", componentName: "SalesForm", isProtected: true },
-  {    url: "/login", componentName: "Login", isProtected: false  },
+  { url: "/login", componentName: "Login", isProtected: false },
 ];
 
 const pages = import.meta.glob("../pages/*.tsx");

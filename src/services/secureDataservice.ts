@@ -1,11 +1,10 @@
 import axios from "../api/axios";
 
 const secureDataservice = {
-  getMessage: async () => {
-    const token = sessionStorage.getItem("token");
-
+  getMessage: async (token: any) => {
+    console.log("Token from Redux store:", token); // Log the token to verify it's being retrieved correctly
     return await axios
-      .get("SecureData/admin", {
+      .get("/SecureData/admin", {
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",

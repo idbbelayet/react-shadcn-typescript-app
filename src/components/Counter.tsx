@@ -1,43 +1,47 @@
-import { useEffect, useRef, useState } from "react";
-import secureDataservice from "../services/secureDataservice";
+import { decrement, increment, incrementByAmount } from "@/redux/counterSlice";
+import { AppDispatch, RootState } from "@/redux/store";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Button } from "./ui/button";
+
 function Counter() {
-  const [message, setMessage] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [call, setCall] = useState(0);
-  const isFirstRender = useRef(true);
-  const handleClick = () => {
-    getProtectedData();
+  const dispatch = useDispatch<AppDispatch>();
+  const counterValue = useSelector((state: RootState) => state.counter.value);
+  const [date, setDate] = useState(new Date());
+  const [count, setCount] = useState(0);
+  const handleIncrement = () => {
+    setCount((x) => x+1);
+    dispatch(increment());
   };
-  const getProtectedData = async () => {
-    try {
-      setCall(call + 1);
-      setLoading(true);
-      const response = await secureDataservice.getMessage();
-      setMessage(response.message);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    } finally {
-      setLoading(false);
-    }
+  const handleDecrement = () => {
+    dispatch(decrement());
+  };
+  const handleIncrementByAmount = (amount: number) => {
+    dispatch(incrementByAmount(amount));
   };
   useEffect(() => {
-    if (isFirstRender.current) {
-      console.log("First render, skipping API call.");
-      isFirstRender.current = false;
-      return; // skip the first extra effect
-    }
-    getProtectedData();
-  }, []);
-
+    setDate(new Date());
+  }, [count]);
   return (
     <>
-      <p>API Called:{call}</p>
-      {loading && <p>Loading...</p>}
-      <p className="mb-5">Secure Message text: {message}</p>
-      <Button variant="default" onClick={handleClick}>
-        Call Secure API
-      </Button>
+      <div className="text-2xl mb-2 font-bold">Example of Redux-toolkit:</div>
+      <p>
+        When click on increament button dispatch action to redux store and using
+        useSlector show stored data in bell icon badge and counter current value
+      </p>
+      <div className="text-xl font-semibold mt-5">
+        <span className=" mr-3">Counter current value from Redux store:</span>
+        <span className="">{counterValue}</span>
+        <br />
+        <span className="mt-5">Time: {date.toLocaleTimeString()}</span>
+      </div>
+      <div className="flex gap-2 mt-5">
+        <Button onClick={handleIncrement}>Increament</Button>
+        <Button onClick={handleDecrement}>Decreament</Button>
+        <Button onClick={() => handleIncrementByAmount(10)}>
+          Increament By 10
+        </Button>
+      </div>
     </>
   );
 }
