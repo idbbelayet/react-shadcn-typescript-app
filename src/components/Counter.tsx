@@ -5,12 +5,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { Button } from "./ui/button";
 
 function Counter() {
+  console.log("Counter component rendered");
   const dispatch = useDispatch<AppDispatch>();
   const counterValue = useSelector((state: RootState) => state.counter.value);
   const [date, setDate] = useState(new Date());
   const [count, setCount] = useState(0);
   const handleIncrement = () => {
-    setCount((x) => x+1);
+    setCount((x) => x + 1);
     dispatch(increment());
   };
   const handleDecrement = () => {

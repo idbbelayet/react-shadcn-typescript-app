@@ -7,6 +7,7 @@ import { useNavigate } from "react-router";
 import Axios from "../api/axios";
 import { Button } from "./ui/button";
 function Logout() {
+  console.log("Logout");
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
 

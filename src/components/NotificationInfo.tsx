@@ -3,6 +3,7 @@ import { RootState } from "@/redux/store";
 import { Bell } from "lucide-react";
 import { useSelector } from "react-redux";
 function NotificationInfo() {
+  console.log("NotificationInfo");
   const counterValue = useSelector((state: RootState) => state.counter.value);
   return (
     <div className="relative inline-block">

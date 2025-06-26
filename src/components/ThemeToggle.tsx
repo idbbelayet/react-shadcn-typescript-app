@@ -3,6 +3,7 @@ import { MoonStar, Sun } from "lucide-react";
 import { useEffect, useState } from "react";
 
 export default function ThemeToggle() {
+  console.log("ThemeToggle");
   const [theme, setTheme] = useState<"light" | "dark">(() => {
     const savedTheme = localStorage.getItem("vite-ui-theme") as
       | "light"

@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -42,6 +43,7 @@
 }
 
 :root {
+  --default-font-family: "Lato", "sans-serif";
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.13 0.028 261.692);
@@ -121,6 +123,6 @@
 }
 @layer components {
   .active {
-    @apply text-primary border-l-2 border-l-primary;
+    @apply text-primary border-l-2 border-l-primary  rounded-none bg-primary/10;
   }
 }

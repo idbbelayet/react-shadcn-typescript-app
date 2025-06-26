@@ -26,6 +26,7 @@ import { salesSchema } from "@/validation/salesSchema";
 import { toast } from "sonner";
 
 export default function SalesForm() {
+  console.log("SalesForm component rendered");
   const form = useForm<z.infer<typeof salesSchema>>({
     resolver: zodResolver(salesSchema),
     defaultValues: {

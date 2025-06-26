@@ -15,6 +15,7 @@ import NotificationInfo from "./NotificationInfo";
 import ThemeToggle from "./ThemeToggle";
 import { Button } from "./ui/button";
 function Navbar() {
+  console.log("Navbar");
   const isAuthenticated = useSelector(
     (state: RootState) => state.auth.isAuthenticated
   );
@@ -49,14 +50,17 @@ function Navbar() {
             </Button>
             <NotificationInfo />
             <ThemeToggle />
-            {
+            {isAuthenticated && (
               <Popover>
                 <PopoverTrigger className="cursor-pointer">
-                  {isAuthenticated && <UserInfo />}
+                  <UserInfo />
                 </PopoverTrigger>
-                <PopoverContent>
+
+                <PopoverContent className="mt-[5px]">
                   <ul className="flex flex-col space-y-2">
-                    <li>{isAuthenticated && <UserInfo />}</li>
+                    <li>
+                      <UserInfo />
+                    </li>
                     <Separator />
                     <li>
                       <Logout />
@@ -64,7 +68,7 @@ function Navbar() {
                   </ul>
                 </PopoverContent>
               </Popover>
-            }
+            )}
           </div>
         </div>
       </nav>

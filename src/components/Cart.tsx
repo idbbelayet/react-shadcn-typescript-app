@@ -2,6 +2,7 @@ import { RootState } from "@/redux/store";
 import { useSelector } from "react-redux";
 
 function Cart() {
+  console.log("Cart");
   const counterValue = useSelector((state: RootState) => state.counter.value);
 
   return (
