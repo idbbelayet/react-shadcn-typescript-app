@@ -25,3 +25,11 @@ dist-ssr
 *.pem
 cert.pem
 key.pem
+
+# Ignore private keys
+*.key
+*.crt
+*.pfx
+*.p12
+*.env
+.env.*
